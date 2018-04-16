@@ -4,26 +4,23 @@ Coinpayments Golang wrapper. To use, instantiate a `*coinpayments.Client` by cal
 the `*coinpayments.Config` struct, consisting of your private and public keys, as well as an instance of your desired http client.  
   
 This looks like: 
-`client, err := coinpayments.NewClient(&coinpayments.Config{ PublicKey: "yourpublickey", PrivateKey: "yourprivatekey"}, &http.Client{ Timeout: 10 * time.Second})`.  
+`client, err := coinpayments.NewClient(&coinpayments.Config{ PublicKey: "yourpublickey", PrivateKey: "yourprivatekey"}, &http.Client{ Timeout: 10 * time.Second})`.
   
-Once instantiated, you can use the client to make API calls. An example of the `create_transaction` command being called:  
-  
-  `client.CallCreateTransaction(amount, currency1, currency2, buyerEmail)`, where the amount is the value of the fiat currency you wish to receive.  
+Once instantiated, you can use the client to make API calls. Each call has their own Request struct, and returns it's own Response struct.
+
+An example of the `create_transaction` command being called:  
+
+  `client.CallCreateTransaction(&coinpayments.TransactionRequest{Amount: "1", Currency1: "USD", Currency2: "BTC", BuyerEmail: "test@email.com")`, where the amount is the value of the fiat currency you wish to receive.  
   currency1 is the type of currency that amount is specified in (USD, CAD, JPY, etc).  
   currency2 is the type of currency in crypto that you wish to receive (BTC, ETC, LTC, etc).  
   buyerEmail is optional with the API but mandatory for our client.  
 
-# Calling commands on the API
-If you don't have a valid Reader to pass in to the various Call methods like a `req.Body`,
-you can create an instance of the Reader and pass in your data as a byte slice.
-ie: 
-```
-client.CallGetDepositAddress(&coinpayments.Reader{data: []byte("{\"currency\":\"USD\"}")}`  
-```  
-
 # Call
-If you don't want to pass a Reader to the individual functions, you can use Call to call any command directly.
-You just need to build out your own data with an url.Values, and create an instance of the responsestruct expected by your command.
+You can use Call to call any command directly.
+You just need to build out your own data with an url.Values, and create an instance of the responsestruct expected by your command. Then pass in the relevant
+command from the coinpayments package, ie, `coinpayments.CmdCreateTransaction`.
+
+Here is an example of getting the deposit address:  
 ie: 
 ```
 data := url.Values{}
