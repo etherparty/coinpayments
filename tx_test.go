@@ -19,6 +19,10 @@ func TestCallCreateTransaction(t *testing.T) {
 
 	_, err = client.CallGetTxInfo(&coinpayments.TxInfoRequest{TxID: resp.TxnID})
 
+	if err != nil {
+		t.Fatalf("Could not call get tx info: %s", err.Error())
+	}
+
 }
 
 func TestCallGetCallbackAddress(t *testing.T) {
