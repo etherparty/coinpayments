@@ -2,6 +2,8 @@ package coinpayments
 
 import (
 	"io"
+	"io/ioutil"
+	"net/url"
 )
 
 // IPNDepositResponse is a representation of a response received when any update is happening on a deposit
@@ -24,10 +26,27 @@ type IPNDepositResponse struct {
 // IE: cps.HandleIPNDeposit(req.Body)
 func (c *Client) HandleIPNDeposit(reader io.Reader) (*IPNDepositResponse, error) {
 
-	var resp IPNDepositResponse
-	if err := c.unmarshal(reader, &resp); err != nil {
+	body, err := ioutil.ReadAll(reader)
+	if err != nil {
 		return nil, err
 	}
 
-	return &resp, nil
+	values, err := url.ParseQuery(string(body))
+	if err != nil {
+		return nil, err
+	}
+
+	return &IPNDepositResponse{
+		Address:    values.Get("address"),
+		TxnID:      values.Get("txn_id"),
+		Status:     values.Get("status"),
+		StatusText: values.Get("status_text"),
+		Currency:   values.Get("currency"),
+		Confirms:   values.Get("confirms"),
+		Amount:     values.Get("amount"),
+		AmountI:    values.Get("amounti"),
+		Fee:        values.Get("fee"),
+		FeeI:       values.Get("feei"),
+		DestTag:    values.Get("dest_tag"),
+	}, nil
 }
