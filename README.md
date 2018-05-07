@@ -34,7 +34,42 @@ err := c.Call(coinpayments.CmdGetDepositAddress, data, &resp)
 You need to export two environment variables for the tests to run - your public key, and private key.  
 ```
 export COINPAYMENTS_PUBLIC_KEY=yourpublickeyhere
-export COINPAYMENTS_PRIVATE_KEY=yourprivatekeyhere  
+export COINPAYMENTS_PRIVATE_KEY=yourprivatekeyhere
 
 go test ./...
 ```
+
+If you want to run the PBN Tag tests and have purchased a PBN Tag, you can also export it, and those tests will run. Otherwise, they will be ignored.
+
+```
+export COINPAYMENTS_PBN_TAG=yourpbntaghere
+```
+
+
+# Implemented Methods
+
+## Information Commands
+[ x ] - Get Basic Account Info
+[ x ] - Get Exchange Rates / Supported Coins
+[ x ] - Get Coin Balances
+[ x ] - Get Deposit Address
+
+## Receiving Payments
+[ x ] - Create Transaction
+[ x ] - Callback Addresses
+[ x ] - Get TX Info
+[ x ] - Get TX List
+
+## Withdrawals / Transfers
+[ x ] - Create Transfer
+[ ] - Create Withdrawal / Mass Withdrawal
+[ ] - Convert Coins
+[ ] - Get Withdrawal History
+[ ] - Get Withdrawal Info
+[ ] - Get Conversion Info
+
+## $PayByName ( PBN )
+[ ] - Get Profile Information
+[ ] - Get Tag List
+[ ] - Update Tag Profile
+[ ] - Claim Tag

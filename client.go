@@ -39,6 +39,7 @@ var (
 	CmdGetTxInfo          = "get_tx_info"
 	CmdGetTxInfoMulti     = "get_tx_info_multi"
 	CmdGetTxList          = "get_tx_ids"
+	CmdCreateTransfer     = "create_transfer"
 )
 
 // Reader is our example implementation of a Reader.
@@ -176,8 +177,6 @@ func (c *Client) call(cmd string, data url.Values, responseStruct interface{}) e
 	if err != nil {
 		return err
 	}
-
-	fmt.Println(string(body))
 
 	// unmarshal only the error first, as the server returns invalid json if there is an error. it comes in the form of
 	// {"error":"error", "result":[]}, which cannot unmarshal the invalid array to a struct.

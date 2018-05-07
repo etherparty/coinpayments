@@ -11,7 +11,7 @@ type BalancesRequest struct {
 
 // BalancesResult is a result from the API for a balances command
 type BalancesResult struct {
-	Balance  int32  `json:"balance"`  // balance as integer in satoshis
+	Balance  int    `json:"balance"`  // balance as integer in satoshis
 	Balancef string `json:"balancef"` // balance as floating point number
 }
 
