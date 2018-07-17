@@ -85,7 +85,7 @@ type Client struct {
 
 // SupportedCommands returns a slice of strings with all the available commands
 func SupportedCommands() []string {
-	return []string{CmdCreateTransaction, CmdGetBasicInfo, CmdRates, CmdBalances, CmdGetCallbackAddress, CmdGetDepositAddress, CmdGetTxInfo, CmdGetTxInfoMulti, CmdGetTxList}
+	return []string{CmdCreateTransaction, CmdGetBasicInfo, CmdRates, CmdBalances, CmdGetCallbackAddress, CmdGetDepositAddress, CmdGetTxInfo, CmdGetTxInfoMulti, CmdGetTxList, CmdCreateTransfer}
 }
 
 // NewClient returns a new Client struct, initialized and ready to go
