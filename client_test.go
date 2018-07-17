@@ -1,6 +1,7 @@
 package coinpayments_test
 
 import (
+	"errors"
 	"net/http"
 	"net/url"
 	"os"
@@ -10,7 +11,17 @@ import (
 )
 
 func testClient() (*coinpayments.Client, error) {
-	return coinpayments.NewClient(&coinpayments.Config{PublicKey: os.Getenv("COINPAYMENTS_PUBLIC_KEY"), PrivateKey: os.Getenv("COINPAYMENTS_PRIVATE_KEY")}, &http.Client{})
+	pubKey, ok := os.LookupEnv("COINPAYMENTS_PUBLIC_KEY")
+	if !ok {
+		return nil, errors.New("no public key provided in environment")
+	}
+
+	privateKey, ok := os.LookupEnv("COINPAYMENTS_PRIVATE_KEY")
+	if !ok {
+		return nil, errors.New("no priatekey provided in environment")
+	}
+
+	return coinpayments.NewClient(&coinpayments.Config{PublicKey: pubKey, PrivateKey: privateKey}, &http.Client{})
 
 }
 func TestNewClient(t *testing.T) {
