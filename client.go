@@ -30,16 +30,17 @@ var (
 
 // Commands supported by the API
 var (
-	CmdCreateTransaction  = "create_transaction"
-	CmdGetBasicInfo       = "get_basic_info"
-	CmdRates              = "rates"
-	CmdBalances           = "balances"
-	CmdGetCallbackAddress = "get_callback_address"
-	CmdGetDepositAddress  = "get_deposit_address"
-	CmdGetTxInfo          = "get_tx_info"
-	CmdGetTxInfoMulti     = "get_tx_info_multi"
-	CmdGetTxList          = "get_tx_ids"
-	CmdCreateTransfer     = "create_transfer"
+	CmdCreateTransaction   = "create_transaction"
+	CmdGetBasicInfo        = "get_basic_info"
+	CmdRates               = "rates"
+	CmdBalances            = "balances"
+	CmdGetCallbackAddress  = "get_callback_address"
+	CmdGetDepositAddress   = "get_deposit_address"
+	CmdGetTxInfo           = "get_tx_info"
+	CmdGetTxInfoMulti      = "get_tx_info_multi"
+	CmdGetTxList           = "get_tx_ids"
+	CmdGetConversionLimits = "convert_limits"
+	CmdCreateTransfer      = "create_transfer"
 )
 
 // Reader is our example implementation of a Reader.
