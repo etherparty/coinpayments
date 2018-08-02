@@ -11,14 +11,16 @@ import (
 )
 
 func TestCallGetConversionLimits(t *testing.T) {
-	priv := os.Getenv("PRIVATE_KEY")
-	if priv == "" {
-		t.Fatal("env PRIVATE_KEY is not set")
+	pub, ok := os.LookupEnv("COINPAYMENTS_PUBLIC_KEY")
+	if !ok {
+		t.Fatal("no public key provided in environment")
 	}
-	pub := os.Getenv("PUBLIC_KEY")
-	if pub == "" {
-		t.Fatal("env PUBLIC_KEY is not set")
+
+	priv, ok := os.LookupEnv("COINPAYMENTS_PRIVATE_KEY")
+	if !ok {
+		t.Fatal("no priatekey provided in environment")
 	}
+
 	cfg := &coinpayments.Config{
 		PrivateKey: priv,
 		PublicKey:  pub,
@@ -32,11 +34,11 @@ func TestCallGetConversionLimits(t *testing.T) {
 
 	req1 := coinpayments.ConvertLimitRequest{
 		From: "ETH",
-		To:   "FUEL",
+		To:   "BTC",
 	}
 	req2 := coinpayments.ConvertLimitRequest{
 		From: "BTC",
-		To:   "FUEL",
+		To:   "ETH",
 	}
 
 	resp1, err := client.CallGetConversionLimits(&req1)
