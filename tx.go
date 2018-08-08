@@ -111,15 +111,10 @@ type TxInfoRequest struct {
 	Full string `json:"full"`
 }
 
-// TxInfoResult is the success result returned from the api
-type TxInfoResult struct {
-	Address string `json:"address"`
-}
-
 // TxInfoResponse is the response we receive from the API. The result field will not be populated on error.
 type TxInfoResponse struct {
 	ErrorResponse
-	Result TxInfoResult `json:"result"`
+	Result map[string]interface{} `json:"result"`
 }
 
 // CallGetTxInfo calls the get_tx_info command on the API
