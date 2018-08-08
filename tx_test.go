@@ -1,11 +1,25 @@
 package coinpayments_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/etherparty/coinpayments"
 )
 
+func TestCallGetTxInfo(t *testing.T) {
+	client, err := testClient()
+	if err != nil {
+		t.Fatal("should have instantiated a new client with valid configuration")
+	}
+
+	resp, err := client.CallGetTxInfo(&coinpayments.TxInfoRequest{TxID: "CPCH77TFVEQDO2LBPYQZZZM7VR", Full: "0"})
+	if err != nil {
+		t.Fatal("error getting tx info ", err)
+	}
+
+	fmt.Printf("%+v\n", resp)
+}
 func TestCallCreateTransaction(t *testing.T) {
 	client, err := testClient()
 	if err != nil {

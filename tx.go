@@ -113,13 +113,24 @@ type TxInfoRequest struct {
 
 // TxInfoResult is the success result returned from the api
 type TxInfoResult struct {
-	Address string `json:"address"`
+	TimeCreated    string `json:"time_created"`
+	TimeExpires    string `json:"time_expires"`
+	Status         string `json:"status"`
+	StatusText     string `json:"status_text"`
+	Type           string `json:"type"`
+	Coin           string `json:"coin"`
+	Amount         string `json:"amount"`
+	Amountf        string `json:"amountf"`
+	Received       string `json:"received"`
+	Receivedf      string `json:"receivedf"`
+	RecvConfirms   string `json:"recv_confirms"`
+	PaymentAddress string `json:"payment_address"`
 }
 
 // TxInfoResponse is the response we receive from the API. The result field will not be populated on error.
 type TxInfoResponse struct {
 	ErrorResponse
-	Result TxInfoResult `json:"result"`
+	Result map[string]interface{} `json:"result"`
 }
 
 // CallGetTxInfo calls the get_tx_info command on the API
