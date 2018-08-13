@@ -10,6 +10,7 @@ type TransactionRequest struct {
 	Currency1  string `json:"currency1"`
 	Currency2  string `json:"currency2"`
 	BuyerEmail string `json:"buyer_email"`
+	Address    string `json:"address,omitempty"`
 }
 
 // TransactionResult is a result from the API for a transaction command
@@ -38,7 +39,9 @@ func (c *Client) CallCreateTransaction(req *TransactionRequest) (*TransactionRes
 	data.Add("currency1", req.Currency1)
 	data.Add("currency2", req.Currency2)
 	data.Add("buyer_email", req.BuyerEmail)
-
+	if req.Address != "" {
+		data.Add("address", req.Address)
+	}
 	// make the actual call and unmarshal the response into our TransactionResponse struct
 	var response TransactionResponse
 	if err := c.Call(CmdCreateTransaction, data, &response); err != nil {
@@ -111,15 +114,10 @@ type TxInfoRequest struct {
 	Full string `json:"full"`
 }
 
-// TxInfoResult is the success result returned from the api
-type TxInfoResult struct {
-	Address string `json:"address"`
-}
-
 // TxInfoResponse is the response we receive from the API. The result field will not be populated on error.
 type TxInfoResponse struct {
 	ErrorResponse
-	Result TxInfoResult `json:"result"`
+	Result map[string]interface{} `json:"result"`
 }
 
 // CallGetTxInfo calls the get_tx_info command on the API
