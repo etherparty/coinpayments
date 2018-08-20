@@ -6,6 +6,6 @@ type Config struct {
 	PublicKey            string `mapstructure:"public_key" json:"public_key"`
 	IPNSecret            string `mapstructure:"ipn_secret" json:"ipn_secret"`
 	IPNURL               string `mapstructure:"ipn_url" json:"ipn_url"`
-	BTCForwardingAddress string `json:"btc_forwarding_address,omitempty"`
-	ETHForwardingAddress string `json:"eth_forwarding_address,omitempty"`
+	BTCForwardingAddress string `mapstructure:"btc_forwarding_address" json:"btc_forwarding_address"`
+	ETHForwardingAddress string `mapstructure:"eth_forwarding_address" json:"eth_forwarding_address"`
 }
