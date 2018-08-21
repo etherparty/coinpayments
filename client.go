@@ -75,13 +75,15 @@ type HTTPClient interface {
 
 // Client represents our wrapper for the CoinPayments API
 type Client struct {
-	commands   []string
-	baseURL    string
-	httpClient HTTPClient
-	privateKey string
-	publicKey  string
-	IPNSecret  string
-	IPNURL     string
+	commands             []string
+	baseURL              string
+	httpClient           HTTPClient
+	privateKey           string
+	publicKey            string
+	IPNSecret            string
+	IPNURL               string
+	BTCForwardingAddress string
+	ETHForwardingAddress string
 }
 
 // SupportedCommands returns a slice of strings with all the available commands
@@ -101,7 +103,8 @@ func NewClient(cfg *Config, httpClient HTTPClient) (*Client, error) {
 	// build out our list of necessary commands the API has been instructed to use so far
 	commands := make([]string, 3)
 	commands = append(commands, SupportedCommands()...)
-	cp := &Client{commands: commands, baseURL: baseURL, httpClient: httpClient, privateKey: cfg.PrivateKey, publicKey: cfg.PublicKey, IPNSecret: cfg.IPNSecret, IPNURL: cfg.IPNURL}
+	cp := &Client{commands: commands, baseURL: baseURL, httpClient: httpClient, privateKey: cfg.PrivateKey, publicKey: cfg.PublicKey, IPNSecret: cfg.IPNSecret, IPNURL: cfg.IPNURL,
+		BTCForwardingAddress: cfg.BTCForwardingAddress, ETHForwardingAddress: cfg.ETHForwardingAddress}
 	return cp, nil
 }
 
