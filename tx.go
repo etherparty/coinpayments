@@ -21,6 +21,7 @@ type TransactionResult struct {
 	ConfirmsNeeded string `json:"confirms_needed"`
 	Timeout        uint32 `json:"timeout"`
 	StatusURL      string `json:"status_url"`
+	CheckoutURL    string `json:"checkout_url"`
 	QRCodeURL      string `json:"qrcode_url"`
 }
 
