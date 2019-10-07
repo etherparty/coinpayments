@@ -11,6 +11,15 @@ type TransactionRequest struct {
 	Currency2  string `json:"currency2"`
 	BuyerEmail string `json:"buyer_email"`
 	Address    string `json:"address,omitempty"`
+
+	BuyerName  string `json:"buyer_name,omitempty"`
+	ItemName   string `json:"item_name,omitempty"`
+	ItemNumber string `json:"item_number,omitempty"`
+	Invoice    string `json:"invoice,omitempty"`
+	Custom     string `json:"custom,omitempty"`
+	IPNURL     string `json:"ipn_url,omitempty"`
+	SuccessURL string `json:"success_url,omitempty"`
+	CancelURL  string `json:"cancel_url,omitempty"`
 }
 
 // TransactionResult is a result from the API for a transaction command
