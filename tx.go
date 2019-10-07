@@ -6,12 +6,14 @@ import (
 
 // TransactionRequest is what we sent to the API
 type TransactionRequest struct {
+	// required
 	Amount     string `json:"amount"`
 	Currency1  string `json:"currency1"`
 	Currency2  string `json:"currency2"`
 	BuyerEmail string `json:"buyer_email"`
-	Address    string `json:"address,omitempty"`
 
+	// optional
+	Address    string `json:"address,omitempty"`
 	BuyerName  string `json:"buyer_name,omitempty"`
 	ItemName   string `json:"item_name,omitempty"`
 	ItemNumber string `json:"item_number,omitempty"`
@@ -49,9 +51,35 @@ func (c *Client) CallCreateTransaction(req *TransactionRequest) (*TransactionRes
 	data.Add("currency1", req.Currency1)
 	data.Add("currency2", req.Currency2)
 	data.Add("buyer_email", req.BuyerEmail)
+
 	if req.Address != "" {
 		data.Add("address", req.Address)
 	}
+	if req.BuyerName != "" {
+		data.Add("buyer_name", req.BuyerName)
+	}
+	if req.ItemName != "" {
+		data.Add("item_name", req.ItemName)
+	}
+	if req.ItemNumber != "" {
+		data.Add("item_number", req.ItemNumber)
+	}
+	if req.Invoice != "" {
+		data.Add("invoice", req.Invoice)
+	}
+	if req.Custom != "" {
+		data.Add("custom", req.Custom)
+	}
+	if req.IPNURL != "" {
+		data.Add("ipn_url", req.IPNURL)
+	}
+	if req.SuccessURL != "" {
+		data.Add("success_url", req.SuccessURL)
+	}
+	if req.CancelURL != "" {
+		data.Add("cancel_url", req.CancelURL)
+	}
+
 	// make the actual call and unmarshal the response into our TransactionResponse struct
 	var response TransactionResponse
 	if err := c.Call(CmdCreateTransaction, data, &response); err != nil {
