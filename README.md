@@ -1,5 +1,7 @@
 # coinpayments
 
+Visit https://github.com/jeffwalsh/coinpayments for maintained repo.  
+  
 Coinpayments Golang wrapper. To use, instantiate a `*coinpayments.Client` by calling the `coinpayments.NewClient` function. You will need to pass in a valid instance of
 the `*coinpayments.Config` struct, consisting of your private and public keys, as well as an instance of your desired http client.  
   
